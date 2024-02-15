@@ -11,7 +11,7 @@ const { times2 } = useGetters(['times2'])
 const { setCounter } = useMutations(['setCounter'])
 const inc = () => setCounter(counter.value + 1)
 
-return { inc, counter, times2, setCounter }
+// return { inc, counter, times2, setCounter }
 </script>
 
 <style lang="scss" scoped>

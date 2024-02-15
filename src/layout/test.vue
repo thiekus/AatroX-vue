@@ -209,17 +209,13 @@ let toggleSubMenu = (e) => {
                     "
                 >
                     <li>
-                        <router-link
-                            tag="a"
-                            to="/dashboards/dashboard-version-one"
-                        >
+                        <router-link to="/dashboards/dashboard-version-one">
                             <i class="nav-icon i-Clock mr-2"></i>
                             <span class="item-name"> Version One </span>
                         </router-link>
                     </li>
                     <li>
                         <router-link
-                            tag="a"
                             class
                             to="/dashboards/dashboard-version-two"
                         >
@@ -229,7 +225,6 @@ let toggleSubMenu = (e) => {
                     </li>
                     <li>
                         <router-link
-                            tag="a"
                             class
                             to="/dashboards/dashboard-version-three"
                         >
@@ -239,7 +234,6 @@ let toggleSubMenu = (e) => {
                     </li>
                     <li>
                         <router-link
-                            tag="a"
                             class
                             to="/dashboards/dashboard-version-four"
                         >
@@ -249,7 +243,6 @@ let toggleSubMenu = (e) => {
                     </li>
                     <li>
                         <router-link
-                            tag="a"
                             class
                             to="/dashboards/dashboard-version-five"
                         >
@@ -566,19 +559,19 @@ let toggleSubMenu = (e) => {
                         >
                     </li> -->
                     <li>
-                        <router-link tag="a" class to="/components/button">
+                        <router-link class to="/components/button">
                             <i class="nav-icon i-Clock mr-2"></i>
                             <span class="item-name"> Buttons </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/components/badges">
+                        <router-link class to="/components/badges">
                             <i class="nav-icon i-Clock mr-2"></i>
                             <span class="item-name"> Badges </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/components/accordions">
+                        <router-link class to="/components/accordions">
                             <i
                                 class="nav-icon i-Split-Horizontal-2-Window mr-2"
                             ></i>
@@ -586,19 +579,19 @@ let toggleSubMenu = (e) => {
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/components/alerts">
+                        <router-link class to="/components/alerts">
                             <i class="nav-icon i-Bell1 mr-2"></i>
                             <span class="item-name"> Alerts </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/components/tabs">
+                        <router-link class to="/components/tabs">
                             <i class="nav-icon i-New-Tab mr-2"></i>
                             <span class="item-name"> Tabs </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/components/typography">
+                        <router-link class to="/components/typography">
                             <i class="nav-icon i-Width-Window mr-2"></i>
                             <span class="item-name"> Typoghraphy </span>
                         </router-link>
@@ -662,7 +655,7 @@ let toggleSubMenu = (e) => {
                         >
                     </li>
                     <li>
-                        <router-link tag="a" class to="/profile/profileTwo">
+                        <router-link class to="/profile/profileTwo">
                             <i class="nav-icon i-Find-User text-base mr-2"></i>
                             <span class="item-name"> Profile Ver 2.0 </span>
                         </router-link>
