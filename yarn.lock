@@ -2523,6 +2523,11 @@ optionator@^0.9.3:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
 
+overlayscrollbars@^1.13.3:
+  version "1.13.3"
+  resolved "https://registry.npmjs.org/overlayscrollbars/-/overlayscrollbars-1.13.3.tgz"
+  integrity sha512-1nB/B5kaakJuHXaLXLRK0bUIilWhUGT6q5g+l2s5vqYdLle/sd0kscBHkQC1kuuDg9p9WR4MTdySDOPbeL/86g==
+
 p-limit@^3.0.2:
   version "3.1.0"
   resolved "https://registry.npmjs.org/p-limit/-/p-limit-3.1.0.tgz"
