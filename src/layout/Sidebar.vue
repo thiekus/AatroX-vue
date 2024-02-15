@@ -54,45 +54,38 @@ let handleWindowResize = () => {
                             data-item="dashboards"
                             
                         ></div> -->
-                        <router-link to="/dashboards/dashboard-version-one">
-                            <li class="nav-item">
-                                <div class="nav-item-hold">
-                                    <i class="i-Bar-Chart text-3xl"></i>
-                                    <p>Dashboard</p>
-                                </div>
-                            </li>
+                        <router-link
+                            to="/dashboards/dashboard-version-one"
+                            class="nav-item"
+                        >
+                            <div class="nav-item-hold">
+                                <i class="i-Bar-Chart text-3xl"></i>
+                                <p>Dashboard</p>
+                            </div>
                         </router-link>
-                        <router-link to="/components/button">
-                            <li class="nav-item">
-                                <div class="nav-item-hold">
-                                    <i class="i-Wallet text-3xl"></i>
-                                    <p>Buttons</p>
-                                </div>
-                            </li>
+                        <router-link to="/components/button" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-Wallet text-3xl"></i>
+                                <p>Buttons</p>
+                            </div>
                         </router-link>
-                        <router-link to="/profile/profileTwo">
-                            <li class="nav-item">
-                                <div class="nav-item-hold">
-                                    <i class="i-Find-User text-3xl"></i>
-                                    <p>Profile</p>
-                                </div>
-                            </li>
+                        <router-link to="/profile/profileTwo" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-Find-User text-3xl"></i>
+                                <p>Profile</p>
+                            </div>
                         </router-link>
-                        <router-link to="/signIn">
-                            <li class="nav-item">
-                                <div class="nav-item-hold">
-                                    <i class="i-Checked-User text-3xl"></i>
-                                    <p>Sign In</p>
-                                </div>
-                            </li>
+                        <router-link to="/signIn" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-Checked-User text-3xl"></i>
+                                <p>Sign In</p>
+                            </div>
                         </router-link>
-                        <router-link to="/signUp">
-                            <li class="nav-item">
-                                <div class="nav-item-hold">
-                                    <i class="i-Checked-User text-3xl"></i>
-                                    <p>Sign Up</p>
-                                </div>
-                            </li>
+                        <router-link to="/signUp" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-Checked-User text-3xl"></i>
+                                <p>Sign Up</p>
+                            </div>
                         </router-link>
 
                         <a
