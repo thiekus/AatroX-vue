@@ -173,9 +173,9 @@ export const splineAreaWidgetTwo = {
         dataLabels: {
             enabled: false,
         },
-        stroke: {
-            curve: 'smooth',
-        },
+        // stroke: {
+        //     curve: 'smooth',
+        // },
         legend: {
             show: false,
         },
@@ -242,9 +242,9 @@ export const splineAreaWidgetThree = {
         dataLabels: {
             enabled: false,
         },
-        stroke: {
-            curve: 'smooth',
-        },
+        // stroke: {
+        //     curve: 'smooth',
+        // },
         legend: {
             show: false,
         },

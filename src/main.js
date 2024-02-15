@@ -7,15 +7,14 @@ import './index.css'
 import BaseCard from './components/Base/BaseCard.vue'
 import BaseBtn from './components/Base/BaseBtn.vue'
 
-// perfectscrollbar plugins 
+// perfectscrollbar plugins
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
-import VueApexCharts from "vue3-apexcharts";
+import VueApexCharts from 'vue3-apexcharts'
 
-// globally call 
+// globally call
 
 // app.component('BaseBtn', BaseBtn)
-
 
 createApp(App)
     .component('BaseCard', BaseCard)

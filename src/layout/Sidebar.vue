@@ -156,7 +156,8 @@ let handleWindowResize = () => {
         width: 120px;
 
         background: #fff;
-        box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06),
+        box-shadow:
+            0 4px 20px 1px rgba(0, 0, 0, 0.06),
             0 1px 4px rgba(0, 0, 0, 0.08);
         z-index: 90;
         transition: all 0.24s ease-in-out;

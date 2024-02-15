@@ -1,79 +1,67 @@
 <script setup>
 import { useStore } from 'vuex'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRoute } from 'vue-router';
-import {
-Disclosure,
-DisclosureButton,
-DisclosurePanel,
-} from '@headlessui/vue'
+import { useRoute } from 'vue-router'
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 let store = useStore()
-const route = useRoute();
+const route = useRoute()
 
 let selectedParentMenu = ref('')
 let isMenuOver = ref(false)
 
-
-
 onMounted(() => {
-    toggleSelectedParentMenu()  
-    document.addEventListener("click", returnSelectedParentMenu);
+    toggleSelectedParentMenu()
+    document.addEventListener('click', returnSelectedParentMenu)
 })
 
-// beforeDestroy 
+// beforeDestroy
 onBeforeUnmount(() => {
-    document.removeEventListener("click", returnSelectedParentMenu);
-}) 
+    document.removeEventListener('click', returnSelectedParentMenu)
+})
 
 const returnSelectedParentMenu = () => {
-      if (!isMenuOver.value) {
-        toggleSelectedParentMenu();
-      }
-    
-
+    if (!isMenuOver.value) {
+        toggleSelectedParentMenu()
+    }
 }
 const removeOverlay = () => {
-    store.dispatch('largeSidebar/changeSecondarySidebarPropertiesViaMenuItem');
+    store.dispatch('largeSidebar/changeSecondarySidebarPropertiesViaMenuItem')
     // if (window.innerWidth <= 1200) {
     //     this.changeSidebarProperties();
     // }
-    toggleSelectedParentMenu();
-   
+    toggleSelectedParentMenu()
 }
 
 let toggleSelectedParentMenu = () => {
-    let currentParentUrl = route.path.split("/").filter(x => x !== "")[0]
-   
-    if (currentParentUrl !== undefined || currentParentUrl !== null) {
-        selectedParentMenu.value = currentParentUrl.toLowerCase();
-       
-    } else {
-        selectedParentMenu.value = "dashboards";
-    }
+    let currentParentUrl = route.path.split('/').filter((x) => x !== '')[0]
 
+    if (currentParentUrl !== undefined || currentParentUrl !== null) {
+        selectedParentMenu.value = currentParentUrl.toLowerCase()
+    } else {
+        selectedParentMenu.value = 'dashboards'
+    }
 }
 let toggleSubMenu = (e) => {
-    let hasSubmenu = e.target.dataset.submenu;
-    let parent = e.target.dataset.item;
-   
-    
+    let hasSubmenu = e.target.dataset.submenu
+    let parent = e.target.dataset.item
+
     if (hasSubmenu) {
-        selectedParentMenu.value = parent;
-        store.dispatch('largeSidebar/changeSecondarySidebarPropertiesViaMenuItem', true)
-
-    } 
-    else {
-        selectedParentMenu.value = parent;
-        store.dispatch('largeSidebar/changeSecondarySidebarPropertiesViaMenuItem', false)    
+        selectedParentMenu.value = parent
+        store.dispatch(
+            'largeSidebar/changeSecondarySidebarPropertiesViaMenuItem',
+            true
+        )
+    } else {
+        selectedParentMenu.value = parent
+        store.dispatch(
+            'largeSidebar/changeSecondarySidebarPropertiesViaMenuItem',
+            false
+        )
     }
-    
 }
-
-
-
 </script>
 <template>
-    <div 
+    <div
         class="side-content-wrap"
         @mouseenter="isMenuOver = true"
         @mouseleave="isMenuOver = false"
@@ -91,47 +79,57 @@ let toggleSubMenu = (e) => {
             >
                 <perfect-scrollbar>
                     <ul class="navigation-left">
-                        <li 
-                            @mouseenter="toggleSubMenu" 
-                            class="nav-item" 
-                            :class="selectedParentMenu == 'dashboards' ? 'active' : ''"
+                        <li
+                            class="nav-item"
+                            :class="
+                                selectedParentMenu == 'dashboards'
+                                    ? 'active'
+                                    : ''
+                            "
                             data-item="dashboards"
-                            :data-submenu=true
+                            :data-submenu="true"
+                            @mouseenter="toggleSubMenu"
                         >
                             <a class="nav-item-hold" href="#">
                                 <i class="i-Bar-Chart text-3xl"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li 
-                            @mouseenter="toggleSubMenu" 
-                            class="nav-item" 
-                            :class="selectedParentMenu == 'apps' ? 'active' : ''"
+                        <li
+                            class="nav-item"
+                            :class="
+                                selectedParentMenu == 'apps' ? 'active' : ''
+                            "
                             data-item="apps"
-                            :data-submenu=true
+                            :data-submenu="true"
+                            @mouseenter="toggleSubMenu"
                         >
                             <a class="nav-item-hold" href="#"
                                 ><i class="i-Computer-Secure text-3xl"></i>
                                 <p>Apps</p>
                             </a>
                         </li>
-                        <li 
-                            @mouseenter="toggleSubMenu" 
-                            class="nav-item" 
-                            :class="selectedParentMenu == 'components' ? 'active' : ''"
+                        <li
+                            class="nav-item"
+                            :class="
+                                selectedParentMenu == 'components'
+                                    ? 'active'
+                                    : ''
+                            "
                             data-item="components"
-                            :data-submenu=true
+                            :data-submenu="true"
+                            @mouseenter="toggleSubMenu"
                         >
                             <a class="nav-item-hold" href="#"
                                 ><i class="i-Wallet text-3xl"></i>
                                 <p>Components</p>
                             </a>
                         </li>
-                        <li 
-                            @mouseenter="toggleSubMenu" 
-                            class="nav-item" 
+                        <li
+                            class="nav-item"
                             data-item="widgets"
-                            :data-submenu=true
+                            :data-submenu="true"
+                            @mouseenter="toggleSubMenu"
                         >
                             <a class="nav-item-hold" href="#"
                                 ><i class="i-Atom text-3xl"></i>
@@ -150,12 +148,14 @@ let toggleSubMenu = (e) => {
                                 <p>Components</p>
                             </a>
                         </li> -->
-                        <li 
-                            @mouseenter="toggleSubMenu" 
-                            class="nav-item" 
-                            :class="selectedParentMenu == 'profile' ? 'active' : ''"
+                        <li
+                            class="nav-item"
+                            :class="
+                                selectedParentMenu == 'profile' ? 'active' : ''
+                            "
                             data-item="profile"
-                            :data-submenu=true
+                            :data-submenu="true"
+                            @mouseenter="toggleSubMenu"
                         >
                             <a class="nav-item-hold" href="#"
                                 ><i class="i-Find-User text-3xl"></i>
@@ -174,13 +174,18 @@ let toggleSubMenu = (e) => {
                                 <p>Charts</p>
                             </a>
                         </li>
-                        <li  
-                          class="nav-item" 
-                          data-item="vuexDemo"
-                          :class="selectedParentMenu == 'vuexDemo' ? 'active' : ''"
-                          :data-submenu=true
+                        <li
+                            class="nav-item"
+                            data-item="vuexDemo"
+                            :class="
+                                selectedParentMenu == 'vuexDemo' ? 'active' : ''
+                            "
+                            :data-submenu="true"
                         >
-                            <router-link to="/vuexDemo" class="nav-item-hold" href="#"
+                            <router-link
+                                to="/vuexDemo"
+                                class="nav-item-hold"
+                                href="#"
                                 ><i class="i-Pie-Chart-2 text-3xl"></i>
                                 <p>Doc</p>
                             </router-link>
@@ -189,61 +194,73 @@ let toggleSubMenu = (e) => {
                 </perfect-scrollbar>
             </div>
 
-            <div 
-                :class="{ open: store.state.largeSidebar.sidebarToggleProperties.isSecondarySideNavOpen }"
+            <div
+                :class="{
+                    open: store.state.largeSidebar.sidebarToggleProperties
+                        .isSecondarySideNavOpen,
+                }"
                 class="sidebar-left-secondary shadow"
             >
                 <ul
                     class="mb-4 childNav"
                     data-parent="dashboards"
-                    :class="selectedParentMenu  == 'dashboards' ? 'block' : 'hidden'"
+                    :class="
+                        selectedParentMenu == 'dashboards' ? 'block' : 'hidden'
+                    "
                 >
                     <li>
-                        <router-link tag="a" to="/dashboards/dashboard-version-one">
+                        <router-link
+                            tag="a"
+                            to="/dashboards/dashboard-version-one"
+                        >
                             <i class="nav-icon i-Clock mr-2"></i>
-                            <span class="item-name">
-                                Version One
-                            </span>
+                            <span class="item-name"> Version One </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/dashboards/dashboard-version-two">
+                        <router-link
+                            tag="a"
+                            class
+                            to="/dashboards/dashboard-version-two"
+                        >
                             <i class="nav-icon i-Clock-4 mr-2"></i>
-                            <span class="item-name">
-                                Version Two
-                            </span>
+                            <span class="item-name"> Version Two </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/dashboards/dashboard-version-three">
+                        <router-link
+                            tag="a"
+                            class
+                            to="/dashboards/dashboard-version-three"
+                        >
                             <i class="nav-icon i-Over-Time mr-2"></i>
-                            <span class="item-name">
-                                Version Three
-                            </span>
+                            <span class="item-name"> Version Three </span>
                         </router-link>
                     </li>
                     <li>
-                        
-                        <router-link tag="a" class to="/dashboards/dashboard-version-four">
+                        <router-link
+                            tag="a"
+                            class
+                            to="/dashboards/dashboard-version-four"
+                        >
                             <i class="nav-icon i-Over-Time mr-2"></i>
-                            <span class="item-name">
-                                Version Four
-                            </span>
+                            <span class="item-name"> Version Four </span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link tag="a" class to="/dashboards/dashboard-version-five">
+                        <router-link
+                            tag="a"
+                            class
+                            to="/dashboards/dashboard-version-five"
+                        >
                             <i class="nav-icon i-Clock text-base mr-2"></i>
-                            <span class="item-name">
-                                Version Five
-                            </span>
+                            <span class="item-name"> Version Five </span>
                         </router-link>
                     </li>
                 </ul>
                 <ul
                     class="mb-4 childNav"
                     data-parent="apps"
-                    
                     :class="selectedParentMenu == 'apps' ? 'block' : 'hidden'"
                 >
                     <li>
@@ -269,19 +286,11 @@ let toggleSubMenu = (e) => {
                         <ul class="submenu">
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-purple-500
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-purple-500 flex items-center"
                                     href="apps/app.contact-table.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>Contact Table</p>
@@ -289,19 +298,11 @@ let toggleSubMenu = (e) => {
                             </li>
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-purple-500
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-purple-500 flex items-center"
                                     href="apps/app.contact-list.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>Contact List</p>
@@ -309,20 +310,13 @@ let toggleSubMenu = (e) => {
                             </li>
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-purple-500
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-purple-500 flex items-center"
                                     href="apps/app.contact-grid.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
-                                        >radio_button_unchecked</span>
+                                        class="material-icons text-xs text-gray-800 mr-2"
+                                        >radio_button_unchecked</span
+                                    >
                                     <p>Contact Grid</p>
                                 </a>
                             </li>
@@ -331,18 +325,29 @@ let toggleSubMenu = (e) => {
                     <li class="dropdown-sidemenu">
                         <Disclosure v-slot="{ open }">
                             <DisclosureButton
-                                class="submenuLi hover:text-purple-500 items-center flex justify-between w-full px-6 py-2 text-sm text-left  hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+                                class="submenuLi hover:text-purple-500 items-center flex justify-between w-full px-6 py-2 text-sm text-left hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
                             >
                                 <div class="flex items-center">
-                                    <i class="nav-icon i-Bar-Chart-2 text-base mr-2"></i>
+                                    <i
+                                        class="nav-icon i-Bar-Chart-2 text-base mr-2"
+                                    ></i>
                                     <span>Contact</span>
                                 </div>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     :class="open ? 'transform rotate-90 ' : ''"
-                                     class="h-4 w-4 submenuli-icon transition duration-300 ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    :class="open ? 'transform rotate-90 ' : ''"
+                                    class="h-4 w-4 submenuli-icon transition duration-300 ease-in-out"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    />
                                 </svg>
-                                
                             </DisclosureButton>
                             <transition
                                 enter-active-class="transition duration-100 ease-out"
@@ -352,38 +357,74 @@ let toggleSubMenu = (e) => {
                                 leave-from-class="transform scale-100 opacity-100"
                                 leave-to-class="transform scale-95 opacity-0"
                             >
-                                <DisclosurePanel class="px-6 py-2 pb-2 text-sm text-gray-500 bg-gray-50 text-xs">
-                                   <ul class="">
-                                       <li class="py-2 hover:text-purple-500"> 
-                                           <router-link to="" class="flex align-center submneu-nested-link">
-                                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                                 <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
-                                               </svg>
-                                               Contact Table
-                                           </router-link>
-                                       </li>
-                                       <li class="py-2"> 
-                                           <router-link to="" class="flex align-center submneu-nested-link">
-                                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                                 <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
-                                               </svg>
-                                               Contact Table Two
-                                           </router-link>
-                                       </li>
-                                       <li class="py-2"> 
-                                           <router-link to="/contact/contact-grid" class="flex align-center submneu-nested-link">
-                                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                                 <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
-                                               </svg>
-                                               Contact Grid
-                                           </router-link>
-                                       </li>
-                                   </ul>
-
-
+                                <DisclosurePanel
+                                    class="px-6 py-2 pb-2 text-sm text-gray-500 bg-gray-50 text-xs"
+                                >
+                                    <ul class="">
+                                        <li class="py-2 hover:text-purple-500">
+                                            <router-link
+                                                to=""
+                                                class="flex align-center submneu-nested-link"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5 mr-2"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                                Contact Table
+                                            </router-link>
+                                        </li>
+                                        <li class="py-2">
+                                            <router-link
+                                                to=""
+                                                class="flex align-center submneu-nested-link"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5 mr-2"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                                Contact Table Two
+                                            </router-link>
+                                        </li>
+                                        <li class="py-2">
+                                            <router-link
+                                                to="/contact/contact-grid"
+                                                class="flex align-center submneu-nested-link"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-5 w-5 mr-2"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                                Contact Grid
+                                            </router-link>
+                                        </li>
+                                    </ul>
                                 </DisclosurePanel>
                             </transition>
-                            </Disclosure>
+                        </Disclosure>
                     </li>
                     <li class="dropdown-sidemenu">
                         <a class="submenuLi"
@@ -396,19 +437,11 @@ let toggleSubMenu = (e) => {
                         <ul class="submenu">
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-purple-500
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-purple-500 flex items-center"
                                     href="apps/app.ecommerce.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>Product</p>
@@ -416,19 +449,11 @@ let toggleSubMenu = (e) => {
                             </li>
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-purple-500
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-purple-500 flex items-center"
                                     href="apps/app.ecommerce-list.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>Cart</p>
@@ -436,19 +461,11 @@ let toggleSubMenu = (e) => {
                             </li>
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-purple-500
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-purple-500 flex items-center"
                                     href="apps/app.ecommerce-payment-view.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>Checkout</p>
@@ -473,19 +490,11 @@ let toggleSubMenu = (e) => {
                         <ul class="submenu">
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-primary-400
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-primary-400 flex items-center"
                                     href="apps/app.create-invoice.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>Create Invoice</p>
@@ -493,19 +502,11 @@ let toggleSubMenu = (e) => {
                             </li>
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-primary-400
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-primary-400 flex items-center"
                                     href="apps/app.print-invoice.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>print Invoice</p>
@@ -513,19 +514,11 @@ let toggleSubMenu = (e) => {
                             </li>
                             <li class="hover:bg-gray-100">
                                 <a
-                                    class="
-                                        hover:text-primary-400
-                                        flex
-                                        items-center
-                                    "
+                                    class="hover:text-primary-400 flex items-center"
                                     href="apps/app.invoice-list.html"
                                 >
                                     <span
-                                        class="
-                                            material-icons
-                                            text-xs text-gray-800
-                                            mr-2
-                                        "
+                                        class="material-icons text-xs text-gray-800 mr-2"
                                         >radio_button_unchecked</span
                                     >
                                     <p>List Invoice</p>
@@ -543,7 +536,9 @@ let toggleSubMenu = (e) => {
                 <ul
                     class="mb-4 childNav"
                     data-parent="components"
-                    :class="selectedParentMenu == 'components' ? 'block' : 'hidden'"
+                    :class="
+                        selectedParentMenu == 'components' ? 'block' : 'hidden'
+                    "
                 >
                     <!-- <li>
                         <a href="components/components.animation.html"
@@ -573,49 +568,39 @@ let toggleSubMenu = (e) => {
                     <li>
                         <router-link tag="a" class to="/components/button">
                             <i class="nav-icon i-Clock mr-2"></i>
-                            <span class="item-name">
-                                Buttons
-                            </span>
+                            <span class="item-name"> Buttons </span>
                         </router-link>
                     </li>
                     <li>
                         <router-link tag="a" class to="/components/badges">
                             <i class="nav-icon i-Clock mr-2"></i>
-                            <span class="item-name">
-                                Badges
-                            </span>
+                            <span class="item-name"> Badges </span>
                         </router-link>
                     </li>
                     <li>
                         <router-link tag="a" class to="/components/accordions">
-                            <i class="nav-icon i-Split-Horizontal-2-Window mr-2"></i>
-                            <span class="item-name">
-                                Accordions
-                            </span>
+                            <i
+                                class="nav-icon i-Split-Horizontal-2-Window mr-2"
+                            ></i>
+                            <span class="item-name"> Accordions </span>
                         </router-link>
                     </li>
                     <li>
                         <router-link tag="a" class to="/components/alerts">
                             <i class="nav-icon i-Bell1 mr-2"></i>
-                            <span class="item-name">
-                                Alerts
-                            </span>
+                            <span class="item-name"> Alerts </span>
                         </router-link>
                     </li>
                     <li>
                         <router-link tag="a" class to="/components/tabs">
                             <i class="nav-icon i-New-Tab mr-2"></i>
-                            <span class="item-name">
-                                Tabs
-                            </span>
+                            <span class="item-name"> Tabs </span>
                         </router-link>
                     </li>
                     <li>
                         <router-link tag="a" class to="/components/typography">
                             <i class="nav-icon i-Width-Window mr-2"></i>
-                            <span class="item-name">
-                                Typoghraphy
-                            </span>
+                            <span class="item-name"> Typoghraphy </span>
                         </router-link>
                     </li>
                     <li>
@@ -649,11 +634,7 @@ let toggleSubMenu = (e) => {
                         >
                     </li>
                 </ul>
-                <ul
-                    class="mb-4 childNav hidden"
-                    data-parent="widgets"
-                    
-                >
+                <ul class="mb-4 childNav hidden" data-parent="widgets">
                     <li>
                         <a href="widgets/widgets.charts.html"
                             ><i class="nav-icon i-Clock-3 text-base mr-2"></i
@@ -670,9 +651,10 @@ let toggleSubMenu = (e) => {
                 <ul
                     class="mb-4 childNav"
                     data-parent="profile"
-                    :class="selectedParentMenu == 'profile' ? 'block' : 'hidden'"
+                    :class="
+                        selectedParentMenu == 'profile' ? 'block' : 'hidden'
+                    "
                 >
-                    
                     <li>
                         <a href="pages/profile/profile.v1.html"
                             ><i class="nav-icon i-Find-User text-base mr-2"></i
@@ -680,20 +662,13 @@ let toggleSubMenu = (e) => {
                         >
                     </li>
                     <li>
-                    
                         <router-link tag="a" class to="/profile/profileTwo">
                             <i class="nav-icon i-Find-User text-base mr-2"></i>
-                            <span class="item-name">
-                                Profile Ver 2.0
-                            </span>
+                            <span class="item-name"> Profile Ver 2.0 </span>
                         </router-link>
                     </li>
                 </ul>
-                <ul
-                    class="mb-4 childNav hidden"
-                    data-parent="sessions"
-                    
-                >
+                <ul class="mb-4 childNav hidden" data-parent="sessions">
                     <li>
                         <a href="pages/sessions/signin.html"
                             ><i
@@ -775,11 +750,7 @@ let toggleSubMenu = (e) => {
                         >
                     </li>
                 </ul>
-                <ul
-                    class="mb-4 childNav hidden"
-                    data-parent="charts"
-                    
-                >
+                <ul class="mb-4 childNav hidden" data-parent="charts">
                     <li>
                         <a href="charts/apexCharts/apexCharts.bar.html"
                             ><i
@@ -890,27 +861,37 @@ let toggleSubMenu = (e) => {
                         </ul>
                     </li>
                     <li class="dropdown-sidemenu">
-                        <a href="#"><i class="nav-icon i-Bar-Chart-2 text-base mr-2"></i
+                        <a href="#"
+                            ><i
+                                class="nav-icon i-Bar-Chart-2 text-base mr-2"
+                            ></i
                             ><span class="item-name">Scatter</span
                             ><i class="dd-arrow i-Arrow-Down"></i
                         ></a>
                         <ul class="submenu">
                             <li>
-                                <a class="hover:text-purple-500" href="#">test One</a>
+                                <a class="hover:text-purple-500" href="#"
+                                    >test One</a
+                                >
                             </li>
                             <li>
-                                <a class="hover:text-purple-500" href="#">test Two</a>
+                                <a class="hover:text-purple-500" href="#"
+                                    >test Two</a
+                                >
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        
+
         <div
-            @click="removeOverlay()"
             class="sidebar-overlay"
-            :class="{ open: store.state.largeSidebar.sidebarToggleProperties.isSecondarySideNavOpen }"
+            :class="{
+                open: store.state.largeSidebar.sidebarToggleProperties
+                    .isSecondarySideNavOpen,
+            }"
+            @click="removeOverlay()"
         ></div>
     </div>
 </template>
@@ -919,11 +900,11 @@ let toggleSubMenu = (e) => {
 .submenuLi {
     &:hover {
         .submenuli-icon {
-            color: #8B5CF6;
+            color: #8b5cf6;
         }
     }
     .submenuli-icon {
-        color: #9CA3AF;
+        color: #9ca3af;
     }
 }
 .submneu-nested-link {
@@ -931,7 +912,7 @@ let toggleSubMenu = (e) => {
     color: #000 !important;
     &:hover {
         background-color: transparent !important;
-        color: #8B5CF6 !important;
+        color: #8b5cf6 !important;
     }
 }
 .side-content-wrap {
@@ -942,7 +923,8 @@ let toggleSubMenu = (e) => {
         width: 120px;
 
         background: #fff;
-        box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06),
+        box-shadow:
+            0 4px 20px 1px rgba(0, 0, 0, 0.06),
             0 1px 4px rgba(0, 0, 0, 0.08);
         z-index: 90;
         transition: all 0.24s ease-in-out;
@@ -1035,7 +1017,6 @@ let toggleSubMenu = (e) => {
                                 transform: rotate(90deg);
                                 transition: all 0.3s ease-in;
                             }
-                            
                         }
                         ul.submenu {
                             display: block;
@@ -1071,7 +1052,6 @@ let toggleSubMenu = (e) => {
                         @apply text-purple-500;
                     }
                     &.router-link-active.router-link-exact-active {
-                        
                         @apply text-purple-500;
                     }
                 }
@@ -1094,10 +1074,10 @@ let toggleSubMenu = (e) => {
             }
         }
     }
-    .sidebar-overlay{
+    .sidebar-overlay {
         display: none;
         position: fixed;
-        width: calc( 100% - 120px - 220px);
+        width: calc(100% - 120px - 220px);
         height: calc(100vh - 80px);
         bottom: 0;
         right: 0;
